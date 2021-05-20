@@ -2,8 +2,8 @@
 host = 'mongodb'
 port = 27017
 ssl_ca_cert='/run/secrets/rootCA.pem'
-ssl_certfile='/run/secrets/mongodb_backup/tls_cert.pem'
-ssl_keyfile='/run/secrets/mongodb_backup/tls_key.pem'
+ssl_certfile='/run/secrets/tls_cert.pem'
+ssl_keyfile='/run/secrets/tls_key.pem'
 
 # don't turn these signal into exceptions, just die.
 # necessary for integrating into bash script pipelines seamlessly.
@@ -12,10 +12,10 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 # get administrator credentials
-with open('/run/secrets/mongodb/username','r') as f:
+with open('/run/secrets/username','r') as f:
     username = f.read()
 
-with open('/run/secrets/mongodb/password','r') as f:
+with open('/run/secrets/password','r') as f:
     password = f.read()
 
 from pymongo import MongoClient

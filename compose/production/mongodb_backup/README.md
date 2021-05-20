@@ -24,11 +24,11 @@ backups are stored within three subdirectories on this volume,
 Expects following secrest
 
 * `/run/secrets/rootCA.pem`
-* `/run/secrets/mongodb_backup/tls_cert.pem`
-* `/run/secrets/mongodb_backup/tls_key.pem`
-* `/run/secrets/mongodb/username`
-* `/run/secrets/mongodb/password` 
-* `/run/secrets/mongodb_backup/public_host`
+* `/run/secrets/tls_cert.pem`
+* `/run/secrets/tls_key.pem`
+* `/run/secrets/username`
+* `/run/secrets/password` 
+* `/run/secrets/public_host`
 
 to be provided within the container at runtime.
 

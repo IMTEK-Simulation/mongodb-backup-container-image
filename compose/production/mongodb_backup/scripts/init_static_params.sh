@@ -6,20 +6,20 @@ function initStaticParams
     # at least according to their --help text, mongodump and mongorestore
     # still want the deprecated ssl opts...
     SSL_OPTS="--ssl --sslCAFile /run/secrets/rootCA.pem \
-            --sslPEMKeyFile /run/secrets/mongodb_backup/tls_key_cert.pem \
+            --sslPEMKeyFile /run/secrets/tls_key_cert.pem \
             --sslAllowInvalidHostnames"
 
     # ... while mongoshell itself wants new tsl opts:
     TLS_OPTS="--tls --tlsCAFile /run/secrets/rootCA.pem \
-        --tlsCertificateKeyFile /run/secrets/mongodb_backup/tls_key_cert.pem \
+        --tlsCertificateKeyFile /run/secrets/tls_key_cert.pem \
         --tlsAllowInvalidHostnames"
 
     AUTH_OPTS="--host mongodb --port 27017 \
-        --authenticationDatabase=$(cat /run/secrets/mongodb/username) \
-        --username=$(cat /run/secrets/mongodb/username) \
-        --password=$(cat /run/secrets/mongodb/password)"
+        --authenticationDatabase=$(cat /run/secrets/username) \
+        --username=$(cat /run/secrets/username) \
+        --password=$(cat /run/secrets/password)"
 
-    PUBLIC_HOST="$(cat /run/secrets/mongodb_backup/public_host)"
+    PUBLIC_HOST="$(cat /run/secrets/public_host)"
 
     LOG_MESSAGE_ERROR=1
     LOG_MESSAGE_WARN=2
