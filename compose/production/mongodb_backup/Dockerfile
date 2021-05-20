@@ -28,8 +28,6 @@ RUN ln -s /usr/local/bin/incremental_dump.sh /etc/cron.daily/incremental_dump
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod 700 /usr/local/bin/docker-entrypoint.sh
 
-COPY init_rs.js /init_rs.js
-
 ENTRYPOINT ["/tini", "--", "docker-entrypoint.sh"]
 
 CMD ["cron", "-f"]
