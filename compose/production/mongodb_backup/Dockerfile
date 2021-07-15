@@ -1,4 +1,5 @@
-FROM imteksim/mongod-on-smb:latest
+ARG BASEIMAGE_VERSION=latest
+FROM imteksim/mongod-on-smb:$BASEIMAGE_VERSION
 
 RUN mkdir -p /data/backup
 
