@@ -28,6 +28,10 @@ set -Eeuox pipefail
 echo "Running entrypoint as $(whoami), uid=$(id -u), gid=$(id -g)."
 
 echo ""
+echo "Mounting smb share '//${SMB_HOST:-sambaserver}/${SMB_SHARE:-sambashare}':"
+mount -t cifs -o rw,iocharset=utf8,credentials=/run/secrets/smb-credentials,file_mode=0600,dir_mode=0700 "//${SMB_HOST:-sambaserver}/${SMB_SHARE:-sambashare}" /data/backup
+
+echo ""
 echo "Current mounts:"
 mount
 echo ""
@@ -48,6 +52,7 @@ term_handler() {
     kill -SIGTERM "$pid"
     wait "$pid"
   fi
+  umount /data/backup
   echo "Shut down gracefully."
   exit 143; # 128 + 15 -- SIGTERM
 }
@@ -62,6 +67,7 @@ pid="$!"
 wait "$pid"
 ret="$?"
 echo "${@} ended with return code ${ret}".
+umount /data/backup
 exit "${ret}"
 
 # http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_12_02.html
