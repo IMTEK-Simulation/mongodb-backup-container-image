@@ -29,7 +29,7 @@ echo "Running entrypoint as $(whoami), uid=$(id -u), gid=$(id -g)."
 
 echo ""
 echo "Mounting smb share '//${SMB_HOST:-sambaserver}/${SMB_SHARE:-sambashare}':"
-mount -t cifs -o rw,iocharset=utf8,credentials=/run/secrets/smb-credentials,file_mode=0600,dir_mode=0700 "//${SMB_HOST:-sambaserver}/${SMB_SHARE:-sambashare}" /data/backup
+mount -t cifs -o ${SMB_MOUNT_OPTIONS:-rw,iocharset=utf8,credentials=/run/secrets/smb-credentials,file_mode=0600,dir_mode=0700} "//${SMB_HOST:-sambaserver}/${SMB_SHARE:-sambashare}" /data/backup
 
 echo ""
 echo "Current mounts:"
